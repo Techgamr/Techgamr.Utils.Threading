@@ -1,0 +1,50 @@
+name: .NET - Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types:
+      - published
+
+jobs:
+  test:
+    runs-on: ${{ matrix.OS }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        configuration: [Release, Debug]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration ${{ matrix.configuration }}
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --configuration ${{ matrix.configuration }}
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'release' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Package
+        run: dotnet pack --configuration Release --no-restore
+      - name: Add GitHub package source
+        run: dotnet nuget add source https://nuget.pkg.github.com/Techgamr/index.json --name "github" --store-password-in-clear-text --username Techgamr --password ${{ secrets.GITHUB_TOKEN }}
+      - name: Push to GitHub Packages
+        run: dotnet nuget push "Techgamr.Utils.Threading/bin/Release/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "github" --no-symbols true
