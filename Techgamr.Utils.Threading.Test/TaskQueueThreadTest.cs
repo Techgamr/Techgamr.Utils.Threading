@@ -5,12 +5,12 @@ using NUnit.Framework;
 
 namespace Techgamr.Utils.Threading.Test
 {
-    [TestFixture]
+    //[TestFixture]
     public class TaskQueueThreadTest
     {
         private static TaskQueueThread GetThread() => new("Test thread");
 
-        [Test]
+        //[Test]
         public void Naming()
         {
             var lck = new object();
@@ -35,7 +35,7 @@ namespace Techgamr.Utils.Threading.Test
             Assert.IsTrue(t.Running == false);
         }
 
-        [Test]
+        //[Test]
         public void RunsTask()
         {
             var lck = new object();
@@ -67,7 +67,7 @@ namespace Techgamr.Utils.Threading.Test
             Assert.IsTrue(o == 1);
         }
         
-        [Test]
+        //[Test]
         public void Ordering()
         {
             var lck = new object();
@@ -114,7 +114,7 @@ namespace Techgamr.Utils.Threading.Test
             }
         }
 
-        [Test]
+        //[Test]
         public void TaskExceptionHandling()
         {
             var lck = new object();
@@ -145,7 +145,7 @@ namespace Techgamr.Utils.Threading.Test
             Assert.IsTrue(o == "Test");
         }
         
-        [Test]
+        //[Test]
         public void TaskCrashHandlerCrashHandler()
         {
             var lck = new object();
@@ -177,7 +177,7 @@ namespace Techgamr.Utils.Threading.Test
             Assert.IsTrue(o == "Test");
         }
         
-        [Test]
+        //[Test]
         public void SuccessfulThreadExitHandler()
         {
             var lck = new object();
