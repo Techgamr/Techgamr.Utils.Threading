@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techgamr.Utils.Threading", "Techgamr.Utils.Threading\Techgamr.Utils.Threading.csproj", "{294EBA0B-9710-4DB6-825C-8D7D27F3DF0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Techgamr.Utils.Threading.Test", "Techgamr.Utils.Threading.Test\Techgamr.Utils.Threading.Test.csproj", "{7116A31D-A743-462E-B997-5E266DE57D6B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{294EBA0B-9710-4DB6-825C-8D7D27F3DF0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{294EBA0B-9710-4DB6-825C-8D7D27F3DF0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{294EBA0B-9710-4DB6-825C-8D7D27F3DF0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7116A31D-A743-462E-B997-5E266DE57D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7116A31D-A743-462E-B997-5E266DE57D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7116A31D-A743-462E-B997-5E266DE57D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7116A31D-A743-462E-B997-5E266DE57D6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
