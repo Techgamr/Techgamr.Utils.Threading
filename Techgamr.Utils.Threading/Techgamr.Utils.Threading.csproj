@@ -4,6 +4,11 @@
         <TargetFramework>net5.0</TargetFramework>
         <PackageVersion>0.1.0</PackageVersion>
         <Nullable>enable</Nullable>
+        <Title>Techgamr.Utils.Threading</Title>
+        <Authors>Techgamr</Authors>
+        <PackageProjectUrl>https://github.com/Techgamr/Techgamr.Utils.Threading/tree/main/Techgamr.Utils.Threading</PackageProjectUrl>
+        <PackageLicenseUrl>https://raw.githubusercontent.com/Techgamr/Techgamr.Utils.Threading/main/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/Techgamr/Techgamr.Utils.Threading</RepositoryUrl>
     </PropertyGroup>
 
 </Project>
