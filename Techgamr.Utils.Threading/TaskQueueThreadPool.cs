@@ -71,7 +71,7 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        private void CheckAndWaitForResizing()
+        private void CheckAndWaitForRebuilding()
         {
             lock (RebuildLock)
             {
@@ -106,7 +106,7 @@ namespace Techgamr.Utils.Threading
         public bool AddTask(ThreadStart task)
         {
             CheckAndThrowIfNotStarted();
-            CheckAndWaitForResizing();
+            CheckAndWaitForRebuilding();
 
             // Find the first idle thread
             for (var i = 0; i < Threads.Length; i++)
