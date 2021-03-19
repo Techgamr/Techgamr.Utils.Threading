@@ -9,6 +9,7 @@
         <PackageProjectUrl>https://github.com/Techgamr/Techgamr.Utils.Threading/tree/main/Techgamr.Utils.Threading</PackageProjectUrl>
         <PackageLicenseUrl>https://raw.githubusercontent.com/Techgamr/Techgamr.Utils.Threading/main/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/Techgamr/Techgamr.Utils.Threading</RepositoryUrl>
+        <Description>C# threading utils thingy for some projects</Description>
     </PropertyGroup>
 
 </Project>
