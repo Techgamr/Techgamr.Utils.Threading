@@ -51,7 +51,7 @@ namespace Techgamr.Utils.Threading
             OnThreadCreate?.Invoke(this);
         }
 
-        private bool ExecTasks()
+        protected virtual bool ExecTasks()
         {
             if (Tasks.IsEmpty) return false;
             Tasks.TryDequeue(out var threadStart);
@@ -67,7 +67,7 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        public void StopAsync()
+        public virtual void StopAsync()
         {
             Running = false;
             lock (MainLock)
@@ -76,13 +76,13 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        public void StopSync()
+        public virtual void StopSync()
         {
             StopAsync();
             Join();
         }
 
-        private void Run()
+        protected virtual void Run()
         {
             try
             {
@@ -135,9 +135,9 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        public void Start() => Thread.Start();
+        public virtual void Start() => Thread.Start();
 
-        public void AddTask(ThreadStart task)
+        public virtual void AddTask(ThreadStart task)
         {
             Tasks.Enqueue(task);
             lock (MainLock)
@@ -146,6 +146,6 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        public void Join() => Thread.Join();
+        public virtual void Join() => Thread.Join();
     }
 }

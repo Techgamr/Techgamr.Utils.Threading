@@ -19,11 +19,10 @@ namespace Techgamr.Utils.Threading
             PoolName = poolName;
             // Allocate empty array
             Threads = new TaskQueueThread[initialSize];
-            Setup();
+            // ReSharper disable once VirtualMemberCallInConstructor
+            PopulateArray();
         }
-
-        private void Setup() => PopulateArray();
-
+        
         protected virtual void PopulateArray()
         {
             for (var i = 0; i < Threads.Length; i++) Threads[i] = CreateQueueThread(i);
