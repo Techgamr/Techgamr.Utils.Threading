@@ -29,6 +29,9 @@ namespace Techgamr.Utils.Threading
 
         public event ThreadCrashEvent? ThreadCrash;
         public event TaskCrashEvent? TaskCrash;
+
+        public static event ThreadCreateEvent? OnThreadCreate;
+
         /**
          * Mainly for testing but could be used in production
          */
@@ -44,6 +47,8 @@ namespace Techgamr.Utils.Threading
             }
             // ignore, it's not the end of the world if the thread name could not be set
             catch (InvalidOperationException) {}
+            
+            OnThreadCreate?.Invoke(this);
         }
 
         private bool ExecTasks()
