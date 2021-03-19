@@ -19,18 +19,20 @@ namespace Techgamr.Utils.Threading
             PoolName = poolName;
             // Allocate empty array
             Threads = new TaskQueueThread[initialSize];
-            PopulateArray();
+            Setup();
         }
 
-        private void PopulateArray()
+        private void Setup() => PopulateArray();
+
+        protected virtual void PopulateArray()
         {
             for (var i = 0; i < Threads.Length; i++) Threads[i] = CreateQueueThread(i);
             Started = false;
         }
 
-        private TaskQueueThread CreateQueueThread(int index) => new($"{PoolName} #{index}", Background);
+        protected virtual TaskQueueThread CreateQueueThread(int index) => new($"{PoolName} #{index}", Background);
 
-        public void Expand(int by)
+        public virtual void Expand(int by)
         {
             CheckAndThrowIfNotStarted();
             var oldLen = Threads.Length;
@@ -46,7 +48,7 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        public void Resize(int newSize)
+        public virtual void Resize(int newSize)
         {
             var currentSize = Threads.Length;
             if (currentSize == newSize) return;
@@ -54,9 +56,9 @@ namespace Techgamr.Utils.Threading
             else Rebuild(newSize);
         }
 
-        public void Rebuild() => Rebuild(Threads.Length);
+        public virtual void Rebuild() => Rebuild(Threads.Length);
 
-        public void Rebuild(int newSize)
+        public virtual void Rebuild(int newSize)
         {
             CheckAndThrowIfNotStarted();
             lock (RebuildLock) Rebuilding = true;
@@ -71,7 +73,7 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        private void CheckAndWaitForRebuilding()
+        protected virtual void CheckAndWaitForRebuilding()
         {
             lock (RebuildLock)
             {
@@ -79,31 +81,31 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        private void CheckAndThrowIfNotStarted()
+        protected virtual void CheckAndThrowIfNotStarted()
         {
             if (!Started) throw new InvalidOperationException("Pool not started");
         }
 
-        public void Start()
+        public virtual void Start()
         {
             if (Started) throw new InvalidOperationException("Pool already started");
             foreach (var thread in Threads) thread.Start();
             Started = true;
         }
 
-        public void StopAsync()
+        public virtual void StopAsync()
         {
             CheckAndThrowIfNotStarted();
             foreach (var thread in Threads) thread.StopAsync();
         }
 
-        public void StopSync()
+        public virtual void StopSync()
         {
             CheckAndThrowIfNotStarted();
             foreach (var thread in Threads) thread.StopSync();
         }
 
-        public bool AddTask(ThreadStart task)
+        public virtual bool AddTask(ThreadStart task)
         {
             CheckAndThrowIfNotStarted();
             CheckAndWaitForRebuilding();
