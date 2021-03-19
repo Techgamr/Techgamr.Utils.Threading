@@ -94,14 +94,13 @@ namespace Techgamr.Utils.Threading
         public void StopAsync()
         {
             CheckAndThrowIfNotStarted();
-            foreach (var thread in Threads) thread.ScheduleStop();
+            foreach (var thread in Threads) thread.StopAsync();
         }
 
         public void StopSync()
         {
             CheckAndThrowIfNotStarted();
-            StopAsync();
-            foreach (var thread in Threads) thread.Join();
+            foreach (var thread in Threads) thread.StopSync();
         }
 
         public bool AddTask(ThreadStart task)

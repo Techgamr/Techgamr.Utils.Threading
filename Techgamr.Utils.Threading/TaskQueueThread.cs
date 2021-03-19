@@ -62,13 +62,19 @@ namespace Techgamr.Utils.Threading
             }
         }
 
-        public void ScheduleStop()
+        public void StopAsync()
         {
             Running = false;
             lock (MainLock)
             {
                 Monitor.PulseAll(MainLock);
             }
+        }
+
+        public void StopSync()
+        {
+            StopAsync();
+            Join();
         }
 
         private void Run()
