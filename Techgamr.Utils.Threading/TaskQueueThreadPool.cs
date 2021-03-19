@@ -31,7 +31,7 @@ namespace Techgamr.Utils.Threading
 
         protected virtual TaskQueueThread CreateQueueThread(int index) => new(GetThreadName(index), Background);
 
-        private string GetThreadName(int index) => $"{PoolName} #{index}";
+        protected virtual string GetThreadName(int index) => $"{PoolName} #{index}";
 
         public virtual void Expand(int by)
         {
