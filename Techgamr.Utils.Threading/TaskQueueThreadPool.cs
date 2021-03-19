@@ -29,7 +29,9 @@ namespace Techgamr.Utils.Threading
             Started = false;
         }
 
-        protected virtual TaskQueueThread CreateQueueThread(int index) => new($"{PoolName} #{index}", Background);
+        protected virtual TaskQueueThread CreateQueueThread(int index) => new(GetThreadName(index), Background);
+
+        private string GetThreadName(int index) => $"{PoolName} #{index}";
 
         public virtual void Expand(int by)
         {
@@ -38,7 +40,7 @@ namespace Techgamr.Utils.Threading
             var newLen = oldLen + by;
             if (Threads.Length >= newLen)
                 throw new InvalidOperationException(
-                    $"Array length is {Threads.Length} but tried to Expand() to {newLen}. Use Rebuild(int newSize) instead.");
+                    $"Array length is {Threads.Length} but tried to Expand() to {newLen}. Use Rebuild(int) instead.");
             Array.Resize(ref Threads, newLen);
             for (var i = oldLen; i < newLen; i++)
             {
