@@ -13,6 +13,8 @@ namespace Techgamr.Utils.Threading
         protected volatile bool Rebuilding;
         protected volatile object RebuildLock = new();
 
+        public int ThreadCount => Threads.Length;
+
         public TaskQueueThreadPool(int initialSize, string poolName, bool background = true)
         {
             Background = background;
