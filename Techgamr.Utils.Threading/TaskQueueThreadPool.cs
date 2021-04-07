@@ -15,6 +15,9 @@ namespace Techgamr.Utils.Threading
 
         public int ThreadCount => Threads.Length;
 
+        public event TaskCrashEvent? TaskCrash;
+        public event ThreadCrashEvent? ThreadCrash;
+
         public TaskQueueThreadPool(int initialSize, string poolName, bool background = true)
         {
             Background = background;
@@ -31,7 +34,17 @@ namespace Techgamr.Utils.Threading
             Started = false;
         }
 
-        protected virtual TaskQueueThread CreateQueueThread(int index) => new(GetThreadName(index), Background);
+        protected virtual TaskQueueThread CreateQueueThread(int index)
+        {
+            TaskQueueThread thread = new(GetThreadName(index), Background);
+            thread.TaskCrash += HandleCrash;
+            thread.ThreadCrash += HandleCrash;
+            return thread;
+        }
+
+        private void HandleCrash(ThreadTaskException e) => TaskCrash?.Invoke(e);
+
+        private void HandleCrash(Exception e, string? threadName, ref bool exitWithException) => ThreadCrash?.Invoke(e, threadName, ref exitWithException);
 
         protected virtual string GetThreadName(int index) => $"{PoolName} #{index}";
 

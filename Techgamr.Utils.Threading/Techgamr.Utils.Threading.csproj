@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <PackageVersion>0.3.2</PackageVersion>
+        <PackageVersion>0.3.3</PackageVersion>
         <Nullable>enable</Nullable>
         <Title>Techgamr.Utils.Threading</Title>
         <Authors>Techgamr</Authors>
@@ -10,6 +10,7 @@
         <PackageLicense>https://raw.githubusercontent.com/Techgamr/Techgamr.Utils.Threading/main/LICENSE</PackageLicense>
         <RepositoryUrl>https://github.com/Techgamr/Techgamr.Utils.Threading</RepositoryUrl>
         <Description>C# threading utils thingy for some projects</Description>
+        <AssemblyVersion>0.3.3</AssemblyVersion>
     </PropertyGroup>
 
 </Project>
